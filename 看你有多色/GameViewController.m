@@ -25,11 +25,14 @@
 
 @end
 
-@implementation GameViewController
+@implementation GameViewController {
+    double boardW;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self gameStart];
 }
 
@@ -46,8 +49,8 @@
 }
 //更新游戏视图界面
 - (void)updateGameLevel {
-    [UIView beginAnimations:@"ShowHideView" context:nil];
-    [UIView setAnimationDuration:0.5];
+//    [UIView beginAnimations:@"ShowHideView" context:nil];
+//    [UIView setAnimationDuration:0.5];
     /*删除已有游戏块*/
 //    NSArray *allGameBlocks = [self.gameContentView subviews];
 //    for (UIButton *block in allGameBlocks) {
@@ -66,7 +69,8 @@
         for (int j = 0; j < gameLevel + 1; j++) {
             UIButton *gameBlock = [UIButton buttonWithType:UIButtonTypeCustom];
             gameBlock.backgroundColor = randomColor; //设置统一随机颜色
-            double boardW = self.gameContentView.frame.size.width;
+//            boardW = self.gameContentView.frame.size.width;
+            boardW = [UIScreen mainScreen].bounds.size.width;
             double blockW = (boardW - kBlockMargin * (gameLevel + 2)) / (gameLevel + 1);
             double blockX = kBlockMargin + (kBlockMargin + blockW) * j;
             double blockY = kBlockMargin + (kBlockMargin + blockW) * i;
@@ -93,7 +97,7 @@
 //    }
     //更新得分
     self.scoreLabel.text = [NSString stringWithFormat:@"%02d",gameScore];
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
 }
 //计时器方法
 - (void)gameTimer {
